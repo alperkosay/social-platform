@@ -8,10 +8,10 @@ export default function layout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="py-2 container-md">
-      <div className="flex">
+    <div className="container-xl">
+      <div className="md:grid grid-cols-[250px_minmax(0,_1fr)_250px]">
         <SidebarWidget />
-        <div className="">
+        <div className="*:px-4 pt-2">
           <HeaderWidget />
           {children}
         </div>
