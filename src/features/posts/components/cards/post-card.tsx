@@ -1,18 +1,36 @@
 import React from "react";
 import { Post } from "../../types/posts";
+import { Calendar, Heart, MessageSquareIcon } from "lucide-react";
 
 export function PostCard({ post }: { post: Post }) {
   return (
     <div className="rounded-lg p-4 shadow-sm">
       {/* Cover Image */}
-      {post.coverImageUrl && (
-        <img
-          src={post.coverImageUrl}
-          alt={post.title}
-          className="w-full h-52 object-cover rounded-lg mb-4"
-        />
-      )}
-
+      <div className="mb-2">
+        {post.coverImageUrl && (
+          <img
+            src={post.coverImageUrl}
+            alt={post.title}
+            className="w-full h-52 object-cover rounded-lg "
+          />
+        )}
+      </div>
+      <ul className="flex gap-4 flex-wrap text-sm *:flex *:items-center *:gap-1">
+        <li>
+          <Heart className="w-5 h-5" />
+          <span>{post.likesCount}</span>
+        </li>
+        <li>
+          <MessageSquareIcon className="w-5 h-5" />
+          <span>{post.commentsCount}</span>
+        </li>
+        {post.publishedAt && (
+          <li className="text-xs ml-auto">
+            <Calendar className="w-4 h-4" />
+            <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
+          </li>
+        )}
+      </ul>
       {/* Title */}
       <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
 
@@ -46,13 +64,6 @@ export function PostCard({ post }: { post: Post }) {
       </div>
 
       {/* Meta Info */}
-      <div className="flex justify-between text-sm text-gray-500">
-        <span>👍 {post.likesCount}</span>
-        <span>💬 {post.commentsCount}</span>
-        {post.publishedAt && (
-          <span>{new Date(post.publishedAt).toLocaleDateString()}</span>
-        )}
-      </div>
     </div>
   );
 }
